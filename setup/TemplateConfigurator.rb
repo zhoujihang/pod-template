@@ -70,7 +70,7 @@ module Pod
     def run
       @message_bank.welcome_message
 
-      print "\nplatform: iOS"
+      print "platform: iOS"
       print "\nlanguage: ObjC"
       ConfigureIOS.perform(configurator: self)
 
