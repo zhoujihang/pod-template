@@ -13,6 +13,10 @@ module Pod
 
     def perform
 
+      print "\ninclude demo application:Yes"
+      print "\ntesting frameworks:xctest"
+      print "\nprefix:XG"
+      
       configurator.set_test_framework("xctest", "m", "ios")
       keep_demo = "Yes"
       framework = "None"

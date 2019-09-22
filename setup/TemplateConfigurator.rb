@@ -70,6 +70,8 @@ module Pod
     def run
       @message_bank.welcome_message
 
+      print "\nplatform: iOS"
+      print "\nlanguage: ObjC"
       ConfigureIOS.perform(configurator: self)
 
       # platform = self.ask_with_answers("What platform do you want to use?", ["iOS", "macOS"]).to_sym

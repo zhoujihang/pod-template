@@ -34,10 +34,10 @@ module Pod
         run_setup_questions
       end
 
-      puts "\n------------------------------"
-      puts ""
-      puts "To get you started we need to ask a few questions, this should only take a minute."
-      puts ""
+      # puts "\n------------------------------"
+      # puts ""
+      # puts "To get you started we need to ask a few questions, this should only take a minute."
+      # puts ""
 
       has_run_before = `defaults read org.cocoapods.pod-template HasRunBefore`.chomp == "1"
 
