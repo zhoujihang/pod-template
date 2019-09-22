@@ -13,56 +13,61 @@ module Pod
 
     def perform
 
-      keep_demo = configurator.ask_with_answers("Would you like to include a demo application with your library", ["Yes", "No"]).to_sym
+      configurator.set_test_framework("xctest", "m", "ios")
+      keep_demo = "Yes"
+      framework = "None"
+      prefix = "XG"
 
-      framework = configurator.ask_with_answers("Which testing frameworks will you use", ["Specta", "Kiwi", "None"]).to_sym
-      case framework
-        when :specta
-          configurator.add_pod_to_podfile "Specta"
-          configurator.add_pod_to_podfile "Expecta"
+      # keep_demo = configurator.ask_with_answers("Would you like to include a demo application with your library", ["Yes", "No"]).to_sym
 
-          configurator.add_line_to_pch "@import Specta;"
-          configurator.add_line_to_pch "@import Expecta;"
+      # framework = configurator.ask_with_answers("Which testing frameworks will you use", ["Specta", "Kiwi", "None"]).to_sym
+      # case framework
+      #   when :specta
+      #     configurator.add_pod_to_podfile "Specta"
+      #     configurator.add_pod_to_podfile "Expecta"
 
-          configurator.set_test_framework("specta", "m", "ios")
+      #     configurator.add_line_to_pch "@import Specta;"
+      #     configurator.add_line_to_pch "@import Expecta;"
 
-        when :kiwi
-          configurator.add_pod_to_podfile "Kiwi"
-          configurator.add_line_to_pch "@import Kiwi;"
-          configurator.set_test_framework("kiwi", "m", "ios")
+      #     configurator.set_test_framework("specta", "m", "ios")
 
-        when :none
-          configurator.set_test_framework("xctest", "m", "ios")
-      end
+      #   when :kiwi
+      #     configurator.add_pod_to_podfile "Kiwi"
+      #     configurator.add_line_to_pch "@import Kiwi;"
+      #     configurator.set_test_framework("kiwi", "m", "ios")
 
-      snapshots = configurator.ask_with_answers("Would you like to do view based testing", ["Yes", "No"]).to_sym
-      case snapshots
-        when :yes
-          configurator.add_pod_to_podfile "FBSnapshotTestCase"
-          configurator.add_line_to_pch "@import FBSnapshotTestCase;"
+      #   when :none
+      #     configurator.set_test_framework("xctest", "m", "ios")
+      # end
 
-          if keep_demo == :no
-              puts " Putting demo application back in, you cannot do view tests without a host application."
-              keep_demo = :yes
-          end
+      # snapshots = configurator.ask_with_answers("Would you like to do view based testing", ["Yes", "No"]).to_sym
+      # case snapshots
+      #   when :yes
+      #     configurator.add_pod_to_podfile "FBSnapshotTestCase"
+      #     configurator.add_line_to_pch "@import FBSnapshotTestCase;"
 
-          if framework == :specta
-              configurator.add_pod_to_podfile "Expecta+Snapshots"
-              configurator.add_line_to_pch "@import Expecta_Snapshots;"
-          end
-      end
+      #     if keep_demo == :no
+      #         puts " Putting demo application back in, you cannot do view tests without a host application."
+      #         keep_demo = :yes
+      #     end
 
-      prefix = nil
+      #     if framework == :specta
+      #         configurator.add_pod_to_podfile "Expecta+Snapshots"
+      #         configurator.add_line_to_pch "@import Expecta_Snapshots;"
+      #     end
+      # end
 
-      loop do
-        prefix = configurator.ask("What is your class prefix").upcase
+      # prefix = nil
 
-        if prefix.include?(' ')
-          puts 'Your class prefix cannot contain spaces.'.red
-        else
-          break
-        end
-      end
+      # loop do
+      #   prefix = configurator.ask("What is your class prefix").upcase
+
+      #   if prefix.include?(' ')
+      #     puts 'Your class prefix cannot contain spaces.'.red
+      #   else
+      #     break
+      #   end
+      # end
 
       Pod::ProjectManipulator.new({
         :configurator => @configurator,
