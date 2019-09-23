@@ -6,6 +6,8 @@ target '${POD_NAME}_Example' do
   pod '${POD_NAME}', :path => '../'
   ${Pod_Protocol}
 
+  pod 'Masonry'
+
   target '${POD_NAME}_Tests' do
     inherit! :search_paths
 
