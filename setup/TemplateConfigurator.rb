@@ -188,7 +188,7 @@ module Pod
       FileUtils.mv "NAME.podspec", "#{pod_name}.podspec"
 
       case @need_protocol
-        when :y
+        when :yes
           FileUtils.mv "NAME_PROTOCOL.podspec", "#{pod_name}Protocol.podspec"
       end
     end
