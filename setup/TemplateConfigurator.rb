@@ -160,7 +160,7 @@ module Pod
       podprotocol_content = ""
       case @need_protocol
         when :yes
-          podprotocol_content = "pod '${@pod_name}Protocol', :path => '../'"
+          podprotocol_content = "pod '#{@pod_name}Protocol', :path => '../'"
       end
       podfile.gsub!("${Pod_Protocol}", podprotocol_content)
       podfile.gsub!("${INCLUDED_PODS}", podfile_content)
@@ -240,7 +240,7 @@ module Pod
     def podfile_path
       'Example/Podfile'
     end
-    
+
     #----------------------------------------#
   end
 end
