@@ -80,20 +80,6 @@ target '#{test_target.name}' do
   ${INCLUDED_PODS}
 end
 RUBY
-
-      case @configurator.isNeed_Protocol
-        when :yes
-          podfile_text = <<-RUBY
-use_frameworks!
-target '#{test_target.name}' do
-  pod '#{@configurator.pod_name}', :path => '../'
-  pod '#{@configurator.pod_name}Protocol', :path => '../'
-  
-  ${INCLUDED_PODS}
-end
-RUBY
-      end
-
       File.open(podfile_path, "w") { |file| file.puts podfile_text }
     end
 

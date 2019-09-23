@@ -157,6 +157,12 @@ module Pod
       podfile_content = @pods_for_podfile.map do |pod|
         "pod '" + pod + "'"
       end.join("\n    ")
+      podprotocol_content = ""
+      case @need_protocol
+        when :yes
+          podprotocol_content = "pod '${@pod_name}Protocol', :path => '../'"
+      end
+      podfile.gsub!("${Pod_Protocol}", podprotocol_content)
       podfile.gsub!("${INCLUDED_PODS}", podfile_content)
       File.open(podfile_path, "w") { |file| file.puts podfile }
     end
@@ -234,10 +240,7 @@ module Pod
     def podfile_path
       'Example/Podfile'
     end
-
-    def isNeed_Protocol
-      @need_protocol
-    end
+    
     #----------------------------------------#
   end
 end
