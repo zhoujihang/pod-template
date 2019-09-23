@@ -11,6 +11,7 @@ module Pod
       @pods_for_podfile = []
       @prefixes = []
       @message_bank = MessageBank.new(self)
+      @need_protocol = false
     end
 
     def ask(question)
@@ -89,7 +90,9 @@ module Pod
       #         ConfigureIOS.perform(configurator: self)
       #     end
       # end
-
+      @need_protocol = self.ask_with_answers("需要创建Pod的协议吗？", ["y", "n"]).to_sym
+      print @need_protocol
+      
       replace_variables_in_files
       clean_template_files
       rename_template_files
@@ -129,6 +132,10 @@ module Pod
 
     def replace_variables_in_files
       file_names = ['POD_LICENSE', 'POD_README.md', 'NAME.podspec', '.travis.yml', podfile_path]
+      case @need_protocol
+      when :y
+        file_names.push 'NAME_PROTOCOL.podspec'
+
       file_names.each do |file_name|
         text = File.read(file_name)
         text.gsub!("${POD_NAME}", @pod_name)
@@ -179,6 +186,10 @@ module Pod
       FileUtils.mv "POD_README.md", "README.md"
       FileUtils.mv "POD_LICENSE", "LICENSE"
       FileUtils.mv "NAME.podspec", "#{pod_name}.podspec"
+
+      case @need_protocol
+      when :y
+        FileUtils.mv "NAME_PROTOCOL.podspec", "#{pod_name}Protocol.podspec"
     end
 
     def rename_classes_folder
