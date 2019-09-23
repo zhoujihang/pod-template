@@ -235,6 +235,9 @@ module Pod
       'Example/Podfile'
     end
 
+    def isNeed_Protocol
+      @need_protocol
+    end
     #----------------------------------------#
   end
 end
