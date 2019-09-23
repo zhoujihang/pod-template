@@ -90,7 +90,7 @@ module Pod
       #         ConfigureIOS.perform(configurator: self)
       #     end
       # end
-      @need_protocol = self.ask_with_answers("需要创建Pod的协议吗？", ["y", "n"]).to_sym
+      @need_protocol = self.ask_with_answers("需要创建Pod的协议吗", ["yes", "no"]).to_sym
       print @need_protocol
       
       replace_variables_in_files
