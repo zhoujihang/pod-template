@@ -132,9 +132,9 @@ module Pod
 
     def replace_variables_in_files
       file_names = ['POD_LICENSE', 'POD_README.md', 'NAME.podspec', '.travis.yml', podfile_path]
-      case @need_protocol
-      when :y
-        file_names.push 'NAME_PROTOCOL.podspec'
+      # case @need_protocol
+      # when :y
+      #   file_names.push 'NAME_PROTOCOL.podspec'
 
       file_names.each do |file_name|
         text = File.read(file_name)
@@ -187,9 +187,9 @@ module Pod
       FileUtils.mv "POD_LICENSE", "LICENSE"
       FileUtils.mv "NAME.podspec", "#{pod_name}.podspec"
 
-      case @need_protocol
-      when :y
-        FileUtils.mv "NAME_PROTOCOL.podspec", "#{pod_name}Protocol.podspec"
+      # case @need_protocol
+      # when :y
+      #   FileUtils.mv "NAME_PROTOCOL.podspec", "#{pod_name}Protocol.podspec"
     end
 
     def rename_classes_folder
