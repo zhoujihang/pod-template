@@ -20,7 +20,7 @@ module Pod
 
       print "\ninclude demo application:Yes"
       print "\ntesting frameworks:xctest"
-      print "\nprefix:#{prefix} ceshi"
+      print "\nprefix:#{prefix}"
       print "\n\n"
 
       # keep_demo = configurator.ask_with_answers("Would you like to include a demo application with your library", ["Yes", "No"]).to_sym
